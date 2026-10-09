@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danni Lu</title>
+<meta name="description" content="Danni Lu, Systems Engineering Ph.D. candidate at Cornell. Transportation, sustainability and public health; data science, machine learning and geospatial analytics.">
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --surface: #ffffff;
+    --text: #1f2328;
+    --muted: #5d6570;
+    --line: #e6e2dc;
+    --accent: #b31b1b;
+    --accent-soft: #f6e9e8;
+    --max: 860px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15171a; --surface: #1d2024; --text: #e8e6e3; --muted: #9aa1a9;
+      --line: #2e3238; --accent: #ff7b72; --accent-soft: #2a1f1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15171a; --surface: #1d2024; --text: #e8e6e3; --muted: #9aa1a9;
+    --line: #2e3238; --accent: #ff7b72; --accent-soft: #2a1f1f;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-family: Charter, "Iowan Old Style", Georgia, serif; line-height: 1.25; margin: 0; }
+
+  /* nav */
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 90%, transparent);
+        backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 54px; gap: 12px; }
+  nav .brand { font-family: Charter, Georgia, serif; font-weight: 700; color: var(--text); }
+  nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; font-size: 15px; overflow-x: auto; }
+  nav ul a { color: var(--muted); white-space: nowrap; }
+  nav ul a:hover { color: var(--accent); text-decoration: none; }
+  #theme { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px;
+           padding: 4px 9px; cursor: pointer; font-size: 14px; }
+
+  /* hero */
+  .hero { padding: 64px 0 40px; display: grid; grid-template-columns: 180px 1fr; gap: 36px; align-items: center; }
+  .avatar { width: 180px; height: 180px; border-radius: 50%; background: var(--accent-soft);
+            display: grid; place-items: center; font: 700 56px Charter, Georgia, serif; color: var(--accent);
+            border: 1px solid var(--line); overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .hero h1 { font-size: 40px; }
+  .hero .role { color: var(--muted); margin: 6px 0 14px; font-size: 16px; line-height: 1.45; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .links a { border: 1px solid var(--line); background: var(--surface); color: var(--text);
+             padding: 5px 13px; border-radius: 999px; font-size: 14.5px; }
+  .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  section { padding: 34px 0; border-top: 1px solid var(--line); }
+  section h2 { font-size: 26px; margin-bottom: 18px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+
+  /* research cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .card h3 { font-size: 18px; margin-bottom: 6px; }
+  .card p { font-size: 15px; color: var(--muted); margin: 0; }
+
+  /* lists */
+  .group-title { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+                 margin: 26px 0 10px; font-family: inherit; font-weight: 600; }
+  .pubs { list-style: none; padding: 0; margin: 0; }
+  .pubs li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.55; }
+  .pubs li:last-child { border-bottom: 0; }
+  .pubs .title { font-weight: 600; }
+  .pubs .title a { color: inherit; }
+  .pubs .title a::after { content: " \2197"; color: var(--accent); font-weight: 400; }
+  .pubs .title a:hover { color: var(--accent); }
+  .pubs b { color: var(--text); }
+  .tag { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px;
+         background: var(--accent-soft); color: var(--accent); margin-left: 4px; white-space: nowrap; }
+
+  .timeline { display: grid; gap: 16px; }
+  .row { display: grid; grid-template-columns: 150px 1fr; gap: 18px; }
+  .row .when { color: var(--muted); font-size: 15px; }
+  .row h3 { font-size: 17px; font-family: inherit; font-weight: 600; }
+  .row p { margin: 2px 0 0; font-size: 15.5px; color: var(--muted); }
+
+  .row.edu { grid-template-columns: 150px 1fr auto; align-items: center; }
+  .logo { height: 60px; width: auto; background: #fff; border-radius: 8px; padding: 4px; border: 1px solid var(--line); }
+  .logo.wide { height: auto; width: 150px; padding: 10px 12px; }
+  @media (max-width: 680px) { .row.edu { grid-template-columns: 1fr; } .logo { justify-self: start; margin-top: 6px; } }
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  ul.plain { list-style: none; padding: 0; margin: 0; font-size: 15.5px; }
+  ul.plain li { padding: 5px 0; display: flex; justify-content: space-between; gap: 14px; }
+  ul.plain li span:last-child { color: var(--muted); white-space: nowrap; }
+  details summary { cursor: pointer; color: var(--accent); font-size: 15px; margin-top: 10px; }
+
+  /* ---------- dynamic layer ---------- */
+  #net { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  nav, main, footer { position: relative; z-index: 1; }
+  .glow { position: fixed; width: 420px; height: 420px; border-radius: 50%; pointer-events: none; z-index: 0;
+          background: radial-gradient(circle, color-mix(in srgb, var(--accent) 16%, transparent), transparent 65%);
+          transform: translate(-50%, -50%); left: -999px; top: -999px; }
+  .hero h1 { font-size: 48px; background: linear-gradient(100deg, var(--text) 20%, var(--accent) 60%, #e8833a 90%);
+             background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+             animation: shine 6s linear infinite; }
+  @keyframes shine { to { background-position: 200% center; } }
+  .typed { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 16px; color: var(--accent);
+           min-height: 1.6em; margin-bottom: 10px; }
+  .typed::after { content: "▍"; margin-left: 2px; animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .avatar { position: relative; animation: float 6s ease-in-out infinite; }
+  .avatar::before { content: ""; position: absolute; inset: -8px; border-radius: 50%;
+                    border: 1px dashed var(--accent); opacity: .5; animation: spin 24s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes float { 50% { transform: translateY(-8px); } }
+  .pubs li.has-viz { display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: center; }
+  .thumb { width: 150px; height: 100px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+  @media (max-width: 680px) {
+    .pubs li.has-viz { grid-template-columns: 1fr; gap: 10px; }
+    .thumb { width: 100%; max-width: 300px; height: auto; aspect-ratio: 3 / 2; }
+  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  .card { transition: transform .2s ease, border-color .2s, box-shadow .2s; transform-style: preserve-3d; }
+  .card:hover { border-color: var(--accent); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 18%, transparent); }
+  .pubs li, ul.plain li, .row { transition: background .2s, padding-left .2s; }
+  .pubs li:hover { padding-left: 8px; box-shadow: inset 3px 0 0 var(--accent); }
+  .links a { transition: transform .15s, border-color .15s, color .15s; }
+  .links a:hover { transform: translateY(-2px); }
+  #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 20; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1, .avatar, .avatar::before, .typed::after { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 680px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 40px; }
+    .avatar { margin: 0 auto; }
+    .links { justify-content: center; }
+    .hero h1 { font-size: 34px; }
+    .row { grid-template-columns: 1fr; gap: 2px; }
+    .twocol { grid-template-columns: 1fr; }
+    nav ul { gap: 14px; }
+    .brand { display: none; }
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<canvas id="net"></canvas>
+<div class="glow" id="glow"></div>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Danni Lu</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+    <button id="theme" aria-label="Toggle dark mode">◐</button>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+  <header class="hero">
+    <div class="avatar">
+      <img src="assets/photo.jpg" alt="Danni Lu">
+
+    </div>
+    <div>
+      <h1>Danni Lu</h1>
+      <div class="role">Transportation, Sustainability &amp; Public Health | Data Science, Machine Learning &amp; Geospatial Analytics | Systems Engineering Ph.D. Candidate @ Cornell</div>
+      <div class="typed" id="typed" aria-label="Research focus"></div>
+      <p>I use data science, machine learning, and systems thinking to turn complex, multidisciplinary data into actionable insights for real-world decision-making.</p>
+      <div class="links">
+        <a href="mailto:dl2242@cornell.edu">✉ Email</a>
+        <a href="https://scholar.google.com/citations?user=ndeJNlQAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://www.linkedin.com/in/danni-lu-systems-engineering/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.researchgate.net/profile/Dan-Ni-Lu" target="_blank" rel="noopener">ResearchGate</a>
+      </div>    </div>
+  </header>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>I use data science, machine learning, and systems thinking to turn complex, multidisciplinary data into actionable insights for real-world decision-making.</p>
+    <p>My work focuses on problems at the intersection of transportation, sustainability, urban systems, and public health. I have developed machine-learning approaches for spatiotemporal PM<sub>2.5</sub> hotspot detection, modeled transportation&ndash;environment&ndash;health interactions in New York City, and evaluated transportation policies such as congestion pricing.</p>
+    <p>I am currently pursuing a Ph.D. in Systems Engineering at Cornell University, where my research combines geospatial analytics, system dynamics, and integrated systems modeling to understand complex urban challenges and evaluate potential interventions.</p>
+    <p>My technical experience includes Python, R, SQL/MySQL, ArcGIS, machine learning, geospatial analysis, system dynamics, transportation modeling, and environmental modeling. I especially enjoy bridging technical analysis with practical decision-making and communicating complex results in a clear and useful way.</p>
+    <p>I am interested in applying data science and systems approaches to real-world challenges in mobility, sustainability, urban systems, environmental analytics, and health, and I am always happy to connect with people working across these areas.</p>
+  </section>
+
+  <section id="research">
+    <h2>Research Interests</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Traffic Emissions &amp; Air Quality</h3>
+        <p>On-road and portable-emission measurements, carbon and NO<sub>x</sub> emission factors, and pollutant dispersion in urban street canyons.</p>
+      </div>
+      <div class="card">
+        <h3>Spatiotemporal ML</h3>
+        <p>Machine learning for PM<sub>2.5</sub> hotspot detection and targeted mitigation in cities.</p>
+      </div>
+      <div class="card">
+        <h3>Congestion Pricing</h3>
+        <p>Evaluating New York City's cordon pricing and modeling long-run toll scenarios with system dynamics.</p>
+      </div>
+      <div class="card">
+        <h3>Environment &amp; Health</h3>
+        <p>Links between urban infrastructure, neighborhood deprivation, and health outcomes such as EGFR-mutant lung cancer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <p class="muted">Full and up-to-date list on <a href="https://scholar.google.com/citations?user=ndeJNlQAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>. Asterisk (*) denotes supervisor.</p>
+
+    <h3 class="group-title">Journal Papers</h3>
+    <ol class="pubs" reversed style="padding-left:0;list-style:none">
+      <li data-viz="city"><b>Danni Lu</b>, A. Yazdiani, C. Avci, C. Closs, M. Tayarani, H. O. Gao* (2026). <span class="title"><a href="https://doi.org/10.1016/j.trd.2026.105628" target="_blank" rel="noopener">Urban Transportation, Environment, and Community Health of New York City (UTECH-NYC).</a></span> <i>Transportation Research Part D</i>, 161.</li>
+      <li data-viz="price">T. Faraser, G. Park, <b>Danni Lu</b>, M. Tayarani, H. Deng, H. O. Gao* (2025). <span class="title"><a href="https://doi.org/10.1038/s44407-025-00037-2" target="_blank" rel="noopener">A first look into congestion pricing in the United States: PM<sub>2.5</sub> impacts after six months of New York City cordon pricing.</a></span> <i>npj Clean Air</i>, 1, 39.</li>
+      <li data-viz="hotspot"><b>Danni Lu</b>, A. Yazdiani, T. Faraser, M. Tayarani, H. O. Gao* (2025). <span class="title"><a href="https://doi.org/10.1016/j.trd.2025.105017" target="_blank" rel="noopener">Machine Learning in Spatiotemporal PM<sub>2.5</sub> Hotspots Analysis for Better Targeted Mitigation Strategies.</a></span> <i>Transportation Research Part D</i>, 148.</li>
+      <li data-viz="pems">H. Zhao, H. He*, <b>Danni Lu</b>, D. Zhou, C. Lu, X. Fang, Z. Peng (2024). <span class="title"><a href="https://doi.org/10.1016/j.buildenv.2024.111266" target="_blank" rel="noopener">Evaluation of CO<sub>2</sub> and NO<sub>x</sub> Emissions in Container Diesel Trucks Using a Portable Emissions Measurement System.</a></span> <i>Building and Environment</i>, 252, 111266.</li>
+      <li data-viz="trucks">H. He*, <b>Danni Lu</b>, H. Zhao, Z. Peng (2024). <span class="title"><a href="https://doi.org/10.1016/j.trd.2023.104024" target="_blank" rel="noopener">Characterizing CO<sub>2</sub> and NO<sub>x</sub> Emission of Vehicles Crossing Toll Stations in Highway.</a></span> <i>Transportation Research Part D</i>, 126, 104024.</li>
+      <li data-viz="viaduct"><b>Danni Lu</b>, H. He*, H. Zhao, K. Lu, Z. Peng, J. Li (2023). <span class="title"><a href="https://doi.org/10.1016/j.envres.2023.116200" target="_blank" rel="noopener">Quantifying Traffic-related Carbon Emissions on Elevated Roads through On-road Measurements.</a></span> <i>Environmental Research</i>, 231.</li>
+      <li data-viz="canyon"><b>Danni Lu</b>, H. He*, Z. Wang, H. Zhao, Z. Peng (2023). <span class="title"><a href="https://doi.org/10.1016/j.apr.2023.101726" target="_blank" rel="noopener">Impact of Urban Viaducts on the Vertical Distribution of Fine Particles in Street Canyons.</a></span> <i>Atmospheric Pollution Research</i>, 14(4).</li>
+    </ol>
+
+    <h3 class="group-title">Under Review</h3>
+    <ul class="pubs">
+      <li data-viz="sd"><b>Danni Lu</b>, Y. Qian, C. L. Sy, Y. G. Park, T. Fraser, H. Wan, L. Zhao, H. Deng (2026). <span class="title">System Dynamics Modeling of Congestion Pricing in New York City.</span> <i>Transportation Research Part A</i>.</li>
+      <li data-viz="map"><b>Danni Lu</b>, L. Cui, N. Kunz, M. Wong, M. Tayarani, J. P. Solomon, C. A. Garcia, N. K. Altorki, E. Choi, H. O. Gao, Y. Shieh (2026). <span class="title">Urban infrastructure and environmental features associated with EGFR-mutant lung cancer: Implications for racial/ethnic heterogeneity.</span> <i>The Lancet Regional Health – Americas</i>.</li>
+      <li data-viz="km">M. Wong, L. Cui, <b>Danni Lu</b>, J. T. Wu, H. O. Gao, N. K. Altorki, J. P. Solomon, C. A. Garcia, Y. Shieh, E. Choi (2026). <span class="title">Neighborhood Deprivation and Survival in Lung Cancer: Differences by EGFR Mutation Status.</span> <i>The Lancet Regional Health – Americas</i>.</li>
+    </ul>
+
+    <h3 class="group-title">Conference Papers</h3>
+    <ul class="pubs">
+      <li data-viz="tolls"><b>Danni Lu</b>, C. L. Sy, H. Wan, Y. G. Park, T. Fraser, Y. Qian, L. Zhao, H. Deng (2026). <span class="title">System Dynamics Modeling of NYC Congestion Pricing: The Long Run Performance of Toll Schedules 2025–2031.</span> <i>44th International System Dynamics Conference (ISDC 2026)</i>, Delft, Netherlands, July 20–24. <span class="tag">Interactive presentation</span></li>
+      <li data-viz="hier">A. Yazdiani, <b>Danni Lu</b>, C. Avci, C. Closs, M. Tayarani, H. O. Gao (2026). <span class="title">Congestion Management Process (CMP) in the Data Age: Building a Web-based Hierarchical Multi-scale Congestion Management and Analysis Platform.</span> <i>TRB 105th Annual Meeting</i>.</li>
+      <li data-viz="spike"><b>Danni Lu</b>, H. He, H. Zhao, Z. Peng (2023). <span class="title">Assessment of Vehicle Emissions at Toll Stations Using a Portable Emission Measurement System.</span> <i>TRB 103rd Annual Meeting</i>.</li>
+      <li data-viz="onroad"><b>Danni Lu</b>, H. He, H. Zhao, K. Lu, Z. Peng (2022). <span class="title">Characterizing the Traffic-related Carbon Emission Factors on Elevated Roads Based on On-road Measurements.</span> <i>TRB 102nd Annual Meeting</i>.</li>
+    </ul>
+  </section>
+
+  <section id="experience">
+    <h2>Education &amp; Experience</h2>
+    <div class="timeline">
+      <div class="row edu"><div class="when">2024 – Present</div><div><h3>Cornell University</h3><p>Ph.D. Candidate, Systems Engineering · Passed A exam, Aug. 2026</p></div><img class="logo" src="assets/Cornell_University_seal.png" alt="Cornell University seal" loading="lazy"></div>
+      <div class="row edu"><div class="when">2024 – 2026</div><div><h3>Cornell University</h3><p>M.S., Systems Engineering</p></div><img class="logo" src="assets/Cornell_University_seal.png" alt="Cornell University seal" loading="lazy"></div>
+      <div class="row edu"><div class="when">2021 – 2024</div><div><h3>Shanghai Jiao Tong University</h3><p>M.Sc., Transportation Engineering · Outstanding Graduate 2024 (Top 5%) · National Scholarship 2023 (Top 0.2% in China)</p></div><img class="logo " src="assets/Sjtu-logo-standard-red.png" alt="Shanghai Jiao Tong University logo" loading="lazy"></div>
+      <div class="row edu"><div class="when">2017 – 2021</div><div><h3>Shanghai Maritime University</h3><p>B.Eng., Transportation Engineering · Outstanding Graduate 2021 (Top 5%, 1/88) · Shanghai Scholarship 2020</p></div><img class="logo " src="assets/Shanghai_Maritime_University_logo.png" alt="Shanghai Maritime University logo" loading="lazy"></div>
+    </div>
+
+    <h3 class="group-title">Research Projects &amp; Industry</h3>
+    <div class="timeline">
+      <div class="row"><div class="when">2023 – 2024</div><div><h3>Shanghai Development Research Center</h3><p>Member, The Construction of China's Cruise Industry Chain Ecological System</p></div></div>
+      <div class="row"><div class="when">2021 – 2024</div><div><h3>National Natural Science Foundation of China (No. 12072195)</h3><p>Member, Three-Dimensional Diffusion Mechanism of Urban Elevated Transportation Emissions based on Vertical Monitoring</p></div></div>
+      <div class="row"><div class="when">2021 – 2022</div><div><h3>Shanghai Key Research Topic (2023-Z-J01-A)</h3><p>Member, Technology Innovation Empowering Shanghai's Carbon Peak and Carbon Neutrality Goal</p></div></div>
+      <div class="row"><div class="when">Feb – May 2023</div><div><h3>The Coca-Cola Company, Shanghai</h3><p>Intern, Department of Commercial Product Supply</p></div></div>
+      <div class="row"><div class="when">2019 – 2020</div><div><h3>Student Innovative Entrepreneurial Training Program (S20190605)</h3><p>Leader, ATM Transaction Status Feature Analysis and Anomaly Detection based on Pattern Recognition</p></div></div>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <h2>Teaching &amp; Skills</h2>
+    <div class="twocol">
+      <div>
+        <h3 class="group-title" style="margin-top:0">Teaching Assistant</h3>
+        <ul class="plain">
+          <li><span>SYSEN 5930 Project Management and Leadership for Complex Systems, Cornell</span><span>2026 Fall</span></li>
+          <li><span>SYSEN 5220 Systems Analysis, Behavior and Optimization, Cornell</span><span>2026 Spring</span></li>
+          <li><span>CEE 3040 Uncertainty Analysis in Engineering, Cornell</span><span>2025 Fall</span></li>
+          <li><span>Operations Research, Shanghai Jiao Tong University</span><span>2021 Spring</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="group-title" style="margin-top:0">Skills</h3>
+        <p><b>Programming:</b> Python, R</p>
+        <p><b>Tools:</b> MySQL, Vensim PLE, ArcGIS, VISSIM, Synchro, AERMOD, ANSYS Fluent, AutoCAD, CiteSpace, Origin</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="awards">
+    <h2>Selected Awards</h2>
+    <ul class="plain">
+      <li><span>National Scholarship (Top 0.2%), Ministry of Education of China</span><span>2023</span></li>
+      <li><span>National Second Prize, China Post-Graduate Mathematical Contest in Modeling</span><span>2023</span></li>
+      <li><span>National First Prize (1/492), X-GAME Intelligent New Energy Vehicle Big Data Competition</span><span>2022</span></li>
+      <li><span>Shanghai Outstanding Undergraduate Graduate (Top 5%, 1/88)</span><span>2021</span></li>
+      <li><span>Meritorious Winner (Top 7% worldwide), Mathematical Contest in Modeling (MCM)</span><span>2020</span></li>
+    </ul>
+    <details>
+      <summary>Show more</summary>
+      <ul class="plain">
+        <li><span>Outstanding Undergraduate Thesis, Shanghai Maritime University (Top 5%)</span><span>2021</span></li>
+        <li><span>First Class Scholarship (Top 10%), Shanghai Jiao Tong University</span><span>2021–2023</span></li>
+        <li><span>Third Prize, Bao Shan Cup Shanghai College Student AI Innovation Competition</span><span>2020</span></li>
+        <li><span>Third Prize, Shanghai College Student Computer Application Skills Competition</span><span>2020</span></li>
+        <li><span>National Second Prize (Top 15%), National College Students Mathematical Modeling Competition</span><span>2019</span></li>
+        <li><span>National Second Prize, “Internet+” Innovation Contest</span><span>2019</span></li>
+        <li><span>Shanghai Scholarship (Top 5%, 1/88)</span><span>2019</span></li>
+        <li><span>First Prize, National College Students Mathematical Modeling Competition (Shanghai Division)</span><span>2019</span></li>
+        <li><span>Second Prize, Bao Shan Cup Shanghai College Student AI Innovation Competition</span><span>2019</span></li>
+        <li><span>Special-class Scholarship (Top 5%, 1/88), Shanghai Maritime University</span><span>2018–2021</span></li>
+        <li><span>Outstanding Student (Top 5%, 1/88), Shanghai Maritime University</span><span>2018–2020</span></li>
+        <li><span>“Ren Jian” Enterprise Scholarship (Top 5%, 1/88)</span><span>2018</span></li>
+      </ul>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    © <span id="yr">2026</span> Danni Lu · <a href="mailto:dl2242@cornell.edu">dl2242@cornell.edu</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // scroll progress
+  var bar = document.getElementById('progress');
+  addEventListener('scroll', function () {
+    var h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+
+  // scroll reveal
+  var targets = document.querySelectorAll('section h2, .card, .pubs li, .row, .twocol > div, ul.plain');
+  targets.forEach(function (el) { el.classList.add('reveal'); });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  targets.forEach(function (el) { io.observe(el); });
+
+  // per-paper animated thumbnails
+  (function () {
+    var W = 150, H = 100, TAU = 6.2832, items = [], visible = new Set(), col;
+    function fr(x) { return x - Math.floor(x); }
+    function rnd(i) { return fr(Math.sin(i * 127.1 + 311.7) * 43758.5453); }
+    function ss(a, b, x) { x = Math.max(0, Math.min(1, (x - a) / (b - a))); return x * x * (3 - 2 * x); }
+    function dot(c, x, y, r, a, fill) { c.globalAlpha = a; c.fillStyle = fill; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill(); }
+    function line(c, x1, y1, x2, y2, a, st, w) { c.globalAlpha = a; c.strokeStyle = st; c.lineWidth = w || 1;
+      c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2); c.stroke(); }
+
+    var viz = {
+      // city network: nodes with pulses travelling along links
+      city: function (c, t) {
+        var n = 11, P = [], i, j;
+        for (i = 0; i < n; i++) P.push([14 + rnd(i) * (W - 28), 12 + rnd(i + 40) * (H - 24)]);
+        for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) {
+          var dx = P[i][0] - P[j][0], dy = P[i][1] - P[j][1], d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 52) { line(c, P[i][0], P[i][1], P[j][0], P[j][1], .35, col.m, 1);
+            var u = fr(t * .3 + rnd(i * 9 + j)); dot(c, P[i][0] + (P[j][0] - P[i][0]) * u, P[i][1] + (P[j][1] - P[i][1]) * u, 1.8, .9, col.a); }
+        }
+        for (i = 0; i < n; i++) dot(c, P[i][0], P[i][1], 3 + 1.6 * Math.sin(t * 2 + i), .85, col.a);
+      },
+      // PM2.5 time series dropping after toll start
+      price: function (c, t) {
+        var p = Math.min(fr(t / 7) * 1.6, 1), x, y, tx = W * .5;
+        line(c, 8, H - 14, W - 8, H - 14, .4, col.m, 1);
+        c.setLineDash([3, 3]); line(c, tx, 10, tx, H - 14, .6, col.a, 1); c.setLineDash([]);
+        c.fillStyle = col.a; c.globalAlpha = .9; c.font = '9px sans-serif'; c.fillText('toll', tx + 4, 18);
+        c.globalAlpha = 1; c.strokeStyle = col.a; c.lineWidth = 2; c.beginPath();
+        for (x = 8; x <= 8 + (W - 16) * p; x += 2) {
+          var f = (x - 8) / (W - 16);
+          y = 36 + Math.sin(f * 28) * 4 + Math.sin(f * 9) * 5 + 28 * ss(.5, .62, f);
+          x === 8 ? c.moveTo(x, y) : c.lineTo(x, y);
+        }
+        c.stroke();
+      },
+      // spatial hotspots moving over a grid
+      hotspot: function (c, t) {
+        var cols = 15, rows = 9, cw = (W - 12) / cols, ch = (H - 12) / rows, i, j;
+        for (i = 0; i < cols; i++) for (j = 0; j < rows; j++) {
+          var v = 0, k;
+          for (k = 0; k < 3; k++) {
+            var hx = cols * (.5 + .38 * Math.sin(t * (.25 + k * .11) + k * 2)), hy = rows * (.5 + .36 * Math.cos(t * (.2 + k * .13) + k));
+            v += Math.exp(-((i - hx) * (i - hx) + (j - hy) * (j - hy)) / 7);
+          }
+          c.globalAlpha = .08 + Math.min(v, 1) * .85; c.fillStyle = col.a;
+          c.fillRect(6 + i * cw + 1, 6 + j * ch + 1, cw - 2, ch - 2);
+        }
+      },
+      // trucks passing a toll gate, emitting puffs
+      trucks: function (c, t) {
+        var ry = H * .68, i;
+        line(c, 0, ry + 10, W, ry + 10, .5, col.m, 1.5);
+        line(c, W * .55, ry - 34, W * .55, ry + 10, .8, col.m, 2); line(c, W * .55, ry - 34, W * .75, ry - 34, .8, col.m, 2);
+        for (i = 0; i < 2; i++) {
+          var x = ((t * 26 + i * 80) % (W + 60)) - 30;
+          c.globalAlpha = .9; c.fillStyle = col.a; c.fillRect(x, ry - 8, 22, 14); c.fillRect(x + 23, ry - 3, 8, 9);
+          dot(c, x + 5, ry + 8, 2.5, 1, col.t); dot(c, x + 25, ry + 8, 2.5, 1, col.t);
+          for (var k = 0; k < 6; k++) { var u = fr(t * .9 + k / 6 + i * .3);
+            dot(c, x - 2 - u * 26, ry - 8 - u * 14 - Math.sin(k) * 3, 1.5 + u * 3.5, (1 - u) * .5, col.m); }
+        }
+      },
+      // elevated road with pollution rising from the deck
+      viaduct: function (c, t) {
+        var dy = H * .52, i;
+        line(c, 0, dy, W, dy, .9, col.m, 3);
+        for (i = 0; i < 5; i++) line(c, 15 + i * 30, dy, 15 + i * 30, H - 6, .5, col.m, 3);
+        for (i = 0; i < 2; i++) { var x = ((t * 34 + i * 75) % (W + 30)) - 15; c.globalAlpha = 1; c.fillStyle = col.a; c.fillRect(x, dy - 8, 14, 7); }
+        for (i = 0; i < 26; i++) { var u = fr(t * .22 + rnd(i)), px = rnd(i + 7) * W + Math.sin(t + i) * 6;
+          dot(c, px, dy - 6 - u * (dy - 8), 1.4 + u * 1.6, (1 - u) * .7, col.a); }
+      },
+      // street canyon: vertical concentration profile
+      canyon: function (c, t) {
+        var i, L = W * .24, R = W * .76;
+        c.globalAlpha = .25; c.fillStyle = col.m; c.fillRect(6, 16, L - 6, H - 22); c.fillRect(R, 16, W - R - 6, H - 22);
+        line(c, 0, H - 6, W, H - 6, .6, col.m, 1.5);
+        for (i = 0; i < 44; i++) { var u = fr(i / 44 + t * .05), y = H - 8 - u * u * (H - 24), x = W / 2 + Math.sin(t * .9 + i * 1.7) * (R - L) * .42;
+          dot(c, x, y, 1.9, .75, col.a); }
+        c.globalAlpha = .8; c.fillStyle = col.t; c.font = '8px sans-serif'; c.fillText('PM', 6, 11);
+      },
+      // stock & flow with feedback loop
+      sd: function (c, t) {
+        var lv = .5 + .32 * Math.sin(t * .9), bx = 52, bw = 46, by = 22, bh = 52;
+        c.globalAlpha = .9; c.strokeStyle = col.m; c.lineWidth = 2; c.strokeRect(bx, by, bw, bh);
+        c.globalAlpha = .7; c.fillStyle = col.a; c.fillRect(bx + 1, by + bh - bh * lv, bw - 2, bh * lv - 1);
+        c.setLineDash([4, 3]); c.lineDashOffset = -t * 10; line(c, 4, by + 14, bx, by + 14, .9, col.a, 2);
+        c.lineDashOffset = -t * 10; line(c, bx + bw, by + bh - 10, W - 4, by + bh - 10, .9, col.a, 2); c.setLineDash([]);
+        c.globalAlpha = .6; c.strokeStyle = col.m; c.lineWidth = 1; c.beginPath();
+        c.moveTo(bx + bw / 2, by + bh + 4); c.bezierCurveTo(bx + bw / 2, H - 2, 18, H - 2, 18, by + 20); c.stroke();
+        dot(c, 18, by + 20, 2.5, .9, col.m);
+        var u = fr(t * .4); dot(c, bx + bw / 2 + (18 - bx - bw / 2) * u, by + bh + 4 + Math.sin(u * 3.14) * 18, 2.2, .9, col.a);
+      },
+      // geographic points scanned by a sweep line
+      map: function (c, t) {
+        var sx = (fr(t / 5)) * (W + 20) - 10, i;
+        for (i = 0; i < 46; i++) {
+          var x = 10 + rnd(i) * (W - 20), y = 10 + rnd(i + 90) * (H - 20), hit = Math.abs(x - sx) < 14, hi = i % 3 === 0;
+          dot(c, x, y, hit ? 3.6 : 2.2, hit ? 1 : .55, hi ? col.a : col.m);
+        }
+        line(c, sx, 4, sx, H - 4, .5, col.a, 1);
+      },
+      // Kaplan-Meier style survival curves
+      km: function (c, t) {
+        var p = Math.min(fr(t / 7) * 1.5, 1), s, k;
+        line(c, 10, 8, 10, H - 12, .5, col.m, 1); line(c, 10, H - 12, W - 6, H - 12, .5, col.m, 1);
+        [[.9, col.a, 2], [.55, col.m, 1.6]].forEach(function (cv) {
+          c.globalAlpha = 1; c.strokeStyle = cv[1]; c.lineWidth = cv[2]; c.beginPath();
+          var y = 14, x = 10, n = Math.floor(30 * p);
+          c.moveTo(x, y);
+          for (k = 0; k < n; k++) { x = 10 + k * (W - 16) / 30; c.lineTo(x, y); y += (1.4 + rnd(k + cv[0] * 10) * 2.6) * (cv[0] > .6 ? .85 : 1.35); c.lineTo(x, Math.min(y, H - 14)); }
+          c.stroke();
+        });
+      },
+      // portable emissions measurement on a truck: live CO2 / NOx gauges
+      pems: function (c, t) {
+        var k;
+        line(c, 0, 72, W, 72, .5, col.m, 1.5);
+        c.globalAlpha = .85; c.fillStyle = col.m; c.fillRect(10, 40, 46, 26); c.fillStyle = col.a; c.fillRect(57, 48, 18, 18);
+        c.fillStyle = col.t; c.fillRect(70, 30, 3, 20);
+        dot(c, 20, 70, 3.5, 1, col.t); dot(c, 46, 70, 3.5, 1, col.t); dot(c, 66, 70, 3.5, 1, col.t);
+        for (k = 0; k < 7; k++) { var u = fr(t * .8 + k / 7); dot(c, 71 + u * 18, 28 - u * 20 + Math.sin(k + t) * 2, 1.5 + u * 3, (1 - u) * .55, col.m); }
+        c.setLineDash([3, 3]); c.lineDashOffset = -t * 12; line(c, 76, 36, 104, 30, .6, col.a, 1); c.setLineDash([]);
+        for (k = 0; k < 2; k++) {
+          var h = 16 + 34 * (.5 + .5 * Math.sin(t * 3 + k * 2.2) * Math.sin(t * .9 + k));
+          c.globalAlpha = .9; c.fillStyle = k ? col.m : col.a; c.fillRect(108 + k * 18, 86 - h, 12, h);
+        }
+        c.globalAlpha = .8; c.fillStyle = col.t; c.font = '7px sans-serif'; c.fillText('CO₂', 106, 95); c.fillText('NOx', 125, 95);
+      },
+      // vehicle slows at a toll gate: emission rate spikes
+      spike: function (c, t) {
+        var u = fr(t / 5), a = .85, up = u - a * Math.sin(6.2832 * (u - .5)) / 6.2832, i;
+        var sp = function (v) { return 1 - a * Math.cos(6.2832 * (v - .5)); };
+        line(c, 0, 52, W, 52, .5, col.m, 1.5);
+        line(c, W * .5, 24, W * .5, 52, .8, col.m, 2); line(c, W * .5 - 14, 24, W * .5 + 14, 24, .8, col.m, 2);
+        c.globalAlpha = 1; c.fillStyle = col.a; c.fillRect(up * W - 8, 44, 14, 7);
+        c.globalAlpha = .25; c.strokeStyle = col.m; c.lineWidth = 1.5; c.beginPath();
+        for (i = 0; i <= 60; i++) { var v = i / 60, y = 94 - (4 + 22 * (1 - Math.min(sp(v) / 1.85, 1)) * 1.25);
+          i ? c.lineTo(v * W, y) : c.moveTo(v * W, y); } c.stroke();
+        c.globalAlpha = 1; c.strokeStyle = col.a; c.lineWidth = 2; c.beginPath();
+        for (i = 0; i <= 60 * u; i++) { var v2 = i / 60, y2 = 94 - (4 + 22 * (1 - Math.min(sp(v2) / 1.85, 1)) * 1.25);
+          i ? c.lineTo(v2 * W, y2) : c.moveTo(v2 * W, y2); } c.stroke();
+        dot(c, u * W, 94 - (4 + 22 * (1 - Math.min(sp(u) / 1.85, 1)) * 1.25), 3, 1, col.a);
+      },
+      // elevated road vs ground-level road: same measurement on both
+      onroad: function (c, t) {
+        var k, dx = 104;
+        line(c, 0, 40, dx, 40, .9, col.m, 3);
+        for (k = 0; k < 4; k++) line(c, 12 + k * 28, 41, 12 + k * 28, 83, .4, col.m, 3);
+        line(c, 0, 85, dx, 85, .7, col.m, 2);
+        [[40, 0], [85, 1]].forEach(function (r) {
+          var x = ((t * 30 + r[1] * 55) % (dx + 30)) - 15;
+          c.globalAlpha = 1; c.fillStyle = r[1] ? col.m : col.a; c.fillRect(x, r[0] - 8, 14, 7);
+          for (var i = 0; i < 5; i++) { var u = fr(t * .8 + i / 5 + r[1] * .3);
+            dot(c, x - 1 - u * 12, r[0] - 8 - u * 14, 1.2 + u * 2.4, (1 - u) * .6, r[1] ? col.m : col.a); }
+        });
+        c.globalAlpha = .8; c.fillStyle = col.t; c.font = '7px sans-serif'; c.fillText('elevated', 3, 22); c.fillText('ground', 3, 66);
+        for (k = 0; k < 2; k++) {
+          var h = 14 + 30 * (.5 + .5 * Math.sin(t * 2.6 + k * 1.9) * Math.sin(t * .8 + k * 2.4));
+          c.globalAlpha = .9; c.fillStyle = k ? col.m : col.a; c.fillRect(112 + k * 18, 82 - h, 12, h);
+        }
+        c.globalAlpha = .8; c.fillStyle = col.t; c.fillText('EF', 118, 93); c.fillText('EF', 136, 93);
+        line(c, 108, 84, W - 4, 84, .5, col.m, 1);
+      },
+      // toll schedule steps up; traffic volume relaxes in response
+      tolls: function (c, t) {
+        var p = Math.min(fr(t / 7) * 1.5, 1), i, n = 70, vol = 1, ty, vy;
+        line(c, 8, H - 10, W - 6, H - 10, .5, col.m, 1); line(c, 8, 6, 8, H - 10, .5, col.m, 1);
+        c.globalAlpha = 1; c.strokeStyle = col.a; c.lineWidth = 2; c.beginPath();
+        var vols = [];
+        for (i = 0; i <= n; i++) { var f = i / n, L = Math.floor(f * 4.999), tgt = 1 - .17 * L;
+          vol += (tgt - vol) * .09; vols.push(vol);
+          ty = 40 - L * 7; var x = 8 + f * (W - 14);
+          if (f > p) break; i ? c.lineTo(x, ty) : c.moveTo(x, ty); } c.stroke();
+        c.strokeStyle = col.m; c.lineWidth = 2; c.beginPath();
+        for (i = 0; i < vols.length; i++) { vy = 98 - vols[i] * 42; var x2 = 8 + (i / n) * (W - 14); i ? c.lineTo(x2, vy) : c.moveTo(x2, vy); } c.stroke();
+        c.globalAlpha = .7; c.fillStyle = col.t; c.font = '7px sans-serif'; c.fillText('toll', 12, 12); c.fillText('traffic', 12, 62);
+      },
+      // multi-scale hierarchy being zoomed through
+      hier: function (c, t) {
+        var lvl = Math.floor(t / 1.3) % 3, i, j;
+        var top = [W / 2, 14], mid = [[W * .2, 46], [W * .5, 46], [W * .8, 46]], low = [];
+        mid.forEach(function (m, a) { for (j = -1; j <= 1; j += 2) low.push([m[0] + j * 13, 82, a]); });
+        mid.forEach(function (m) { line(c, top[0], top[1], m[0], m[1], .45, col.m, 1); });
+        low.forEach(function (l) { line(c, mid[l[2]][0], 46, l[0], l[1], .45, col.m, 1); });
+        dot(c, top[0], top[1], 7, lvl === 0 ? 1 : .45, col.a);
+        mid.forEach(function (m) { dot(c, m[0], m[1], 5.5, lvl === 1 ? 1 : .45, col.a); });
+        low.forEach(function (l) { dot(c, l[0], l[1], 4, lvl === 2 ? 1 : .45, col.a); });
+      }
+    };
+
+    function colors() {
+      var s = getComputedStyle(document.documentElement);
+      return { a: s.getPropertyValue('--accent').trim(), m: s.getPropertyValue('--muted').trim(), t: s.getPropertyValue('--text').trim() };
+    }
+
+    document.querySelectorAll('li[data-viz]').forEach(function (li) {
+      var cv = document.createElement('canvas'), d = Math.min(devicePixelRatio || 1, 2), body = document.createElement('div');
+      cv.className = 'thumb'; cv.width = W * d; cv.height = H * d; cv.setAttribute('aria-hidden', 'true');
+      while (li.firstChild) body.appendChild(li.firstChild);
+      li.classList.add('has-viz'); li.appendChild(cv); li.appendChild(body);
+      var ctx = cv.getContext('2d'); ctx.scale(d, d);
+      items.push({ li: li, ctx: ctx, fn: viz[li.dataset.viz] });
+    });
+
+    var vio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { var it = items.filter(function (x) { return x.li === e.target; })[0];
+        e.isIntersecting ? visible.add(it) : visible.delete(it); });
+    });
+    items.forEach(function (it) { vio.observe(it.li); });
+
+    function frame(ms) {
+      col = colors();
+      var t = ms / 1000;
+      visible.forEach(function (it) {
+        it.ctx.clearRect(0, 0, W, H); it.ctx.globalAlpha = 1; it.ctx.setLineDash([]); it.fn(it.ctx, t); it.ctx.globalAlpha = 1;
+      });
+      if (!reduce) requestAnimationFrame(frame);
+    }
+    if (reduce) { items.forEach(function (it) { visible.add(it); }); frame(3500); } else requestAnimationFrame(frame);
+  })();
+
+  // typed line
+  var phrases = ['traffic emissions × urban air quality', 'machine learning for PM2.5 hotspots',
+                 'congestion pricing in New York City', 'system dynamics modeling', 'transportation, environment & health'];
+  var tEl = document.getElementById('typed'), pi = 0, ci = 0, del = false;
+  if (reduce) { tEl.textContent = phrases[0]; } else (function tick() {
+    var w = phrases[pi];
+    tEl.textContent = w.slice(0, ci);
+    if (!del && ci === w.length) { del = true; return setTimeout(tick, 1600); }
+    if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+    ci += del ? -1 : 1;
+    setTimeout(tick, del ? 28 : 55);
+  })();
+
+  // cursor glow + card tilt
+  var glow = document.getElementById('glow');
+  addEventListener('pointermove', function (e) { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+  if (!reduce) document.querySelectorAll('.card').forEach(function (c) {
+    c.addEventListener('pointermove', function (e) {
+      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      c.style.transform = 'perspective(600px) rotateY(' + x * 8 + 'deg) rotateX(' + -y * 8 + 'deg) translateY(-3px)';
+    });
+    c.addEventListener('pointerleave', function () { c.style.transform = ''; });
+  });
+
+  // animated wave background
+  (function () {
+    var cv = document.getElementById('net'), cx = cv.getContext('2d'), W, H, T = 0;
+    function size() { var d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+      cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+    function dark() { var t = document.documentElement.getAttribute('data-theme');
+      return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
+    function draw() {
+      cx.clearRect(0, 0, W, H);
+      var cols = [getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), '#4f8cff', '#2bb3a3', '#e8833a'], i, x;
+      for (i = 0; i < 4; i++) {
+        cx.globalAlpha = dark() ? .12 : .09; cx.fillStyle = cols[i]; cx.beginPath(); cx.moveTo(0, H);
+        for (x = 0; x <= W; x += 12) cx.lineTo(x, H * (.7 + .06 * i) + 24 * Math.sin(x / (150 + i * 50) + T * (.5 + .18 * i) + i * 1.4));
+        cx.lineTo(W, H); cx.closePath(); cx.fill();
+      }
+      cx.globalAlpha = 1;
+    }
+    function loop(ms) { T = ms / 1000; draw(); requestAnimationFrame(loop); }
+    addEventListener('resize', function () { size(); if (reduce) draw(); });
+    size();
+    if (reduce) { T = 4; draw(); } else requestAnimationFrame(loop);
+  })();
+</script>
+</body>
+</html>
